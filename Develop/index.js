@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
 
-const generateREADME = ({ title, description, installationInstructions, usageInformation, contributionGuidelines, testInstructions, githubUsername, githubEmail }) =>
+const generateREADME = ({ title, description, installationInstructions, usageInformation, contributionGuidelines, testInstructions, license, githubUsername, githubEmail }) =>
   `# ${title}
 
 ## Description
@@ -20,6 +20,9 @@ ${contributionGuidelines}
 
 ## Test Instructions
 ${testInstructions}
+
+## License
+${license}
 
 ## Questions
 If you have any questions you can reach me via email or GitHub:
@@ -66,6 +69,12 @@ inquirer
       type: 'input',
       name: 'testInstructions',
       message: 'Test instructions:',
+    },
+    {
+      type: 'list',
+      name: 'license',
+      message: 'Please select the License from the following options:',
+      choices:['one', 'two', 'three']
     },
     {
       type: 'input',

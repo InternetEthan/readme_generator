@@ -1,42 +1,43 @@
-// TODO: Include packages needed for this application
+// required packages
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
 
-const generateREADME = ({title, description}) =>
-`# ${title}
+const generateREADME = ({ title, description }) =>
+  `# ${title}
 
 ## Description
 ${description}`;
 
-// TODO: Create an array of questions for user input
+
+// array of questions for user input
 inquirer
-.prompt([
+  .prompt([
     {
-        type:'input',
-        name: 'title',
-        message: 'Enter the title of your project',
+      type: 'input',
+      name: 'title',
+      message: 'Enter the title of your project',
     },
     {
-        type:'input',
-        name: 'description',
-        message: 'What is the purpose of this project',
+      type: 'input',
+      name: 'description',
+      message: 'What is the purpose of this project',
+    },
+    {
+      type: 'input',
+      name: 'directoryPath',
+      message: 'Enter the absolute path where you want to save the README file:',
     },
     // additional information to be added later
-])
-.then((answers) => {
+  ])
+  .then((answers) => {
     const readmeContent = generateREADME(answers);
+    const fileName = `README.md`; // Generate a unique file name
 
-    fs.writeFile('test.md',readmeContent, (err) =>
-    err ? console.log(err) : console.log('Created README')
-    );
-});
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+    const filePath = path.join(answers.directoryPath, fileName);
 
-// TODO: Create a function to initialize app
-function init() {
-}
-
-// Function call to initialize app
-init();
+    fs.writeFile(filePath, readmeContent, (err) => {
+      if (err) throw err;
+      console.log(`Created README at ${filePath}`);
+    });
+  });

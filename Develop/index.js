@@ -74,7 +74,7 @@ inquirer
       type: 'list',
       name: 'license',
       message: 'Please select the License from the following options:',
-      choices:['one', 'two', 'three']
+      choices:['MIT', 'Apache', 'GPLv2', 'Other']
     },
     {
       type: 'input',
